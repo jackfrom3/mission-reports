@@ -23,6 +23,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@700;800&display=swap">
+<title>Addy Duex Report</title>
 <style>
   :root {
     --bg: #0c0c0d;
@@ -76,6 +77,20 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 16px 20px;
+  }
+  .card.flag, .coach-card.flag {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.22);
+    border-left: 3px solid #ffffff;
+  }
+  .flag-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text);
+    margin-top: 8px;
   }
   .card-label {
     font-size: 12px;
@@ -176,7 +191,7 @@
         <div class="card-label">Workouts Logged</div>
         <div class="card-number">100<sup>%</sup></div>
       </div>
-      <div class="card">
+      <div class="card flag">
         <div class="card-label">Gaps (10+ Days)</div>
         <div class="card-number">6</div>
         <div class="card-sub down">▼ more than avg (3.6)</div>
@@ -247,9 +262,10 @@
       </details>
     </div>
 
-    <div class="coach-card">
+    <div class="coach-card flag">
       <div class="coach-name">Recovery</div>
       <div class="coach-rating">2 / 5</div>
+      <div class="flag-tag">Focus area</div>
       <div class="coach-note">This is your biggest need and will unlock the most progress</div>
       <details class="coach-desc">
         <summary>What this measures</summary>
