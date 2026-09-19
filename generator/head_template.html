@@ -1,0 +1,148 @@
+<title>Addy Duex Report</title>
+<style>
+  :root {
+    --bg: #0c0c0d;
+    --bg-2: #18181a;
+    --bg-3: #09090a;
+    --surface: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.14);
+    --text: #ffffff;
+    --text-dim: rgba(255,255,255,0.55);
+    --text-faint: rgba(255,255,255,0.4);
+    --accent: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 28px 20px 60px;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; }
+
+  .logo { height: 52px; display: block; margin-bottom: 18px; }
+  .name {
+    font-family: 'Barlow', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+  .meta { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+  .header { padding-bottom: 18px; border-bottom: 2px solid var(--border); margin-bottom: 26px; }
+
+  .section { margin-bottom: 32px; }
+  .section-label {
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+
+  .attendance-period { font-size: 13px; color: var(--text-dim); margin-bottom: 12px; }
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .card.flag, .coach-card.flag {
+    --text: #0c0c0d;
+    --text-dim: rgba(12,12,13,0.62);
+    --text-faint: rgba(12,12,13,0.45);
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: var(--text);
+  }
+  .flag-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text);
+    margin-top: 8px;
+  }
+  .card-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    margin-bottom: 8px;
+  }
+  .card-number { font-size: 44px; font-weight: 800; line-height: 1; }
+  .card-number sup { font-size: 22px; font-weight: 400; color: var(--text-dim); top: -0.5em; }
+  .card-sub { font-size: 15px; color: var(--text-dim); margin-top: 5px; }
+  .card-sub.down { color: var(--text-faint); }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .metric-cat { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 2px; }
+  .metric-name { font-size: 22px; font-weight: 700; }
+  .metric-note { font-size: 13px; color: var(--text-dim); margin-top: 4px; line-height: 1.4; }
+  .metric-value { margin-top: 10px; }
+  .metric-value .val { font-size: 24px; font-weight: 700; }
+  .metric-value .pct { font-size: 15px; color: var(--text-dim); margin-left: 8px; }
+
+  .need-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .need-label { font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.3px; margin-bottom: 6px; }
+  .need-text { font-size: 19px; font-weight: 700; }
+
+  .coach-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .coach-name { font-size: 22px; font-weight: 700; }
+  .coach-rating { font-size: 22px; font-weight: 800; margin-top: 6px; }
+  .coach-note { font-size: 18px; margin-top: 10px; color: var(--text); }
+
+  details.coach-desc { margin-top: 8px; }
+  details.coach-desc summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-dim);
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    display: inline-block;
+  }
+  details.coach-desc summary::-webkit-details-marker { display: none; }
+  details.coach-desc[open] summary { color: var(--text); }
+  details.coach-desc .desc-body {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .footer {
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-faint);
+    text-align: center;
+  }
+</style>
