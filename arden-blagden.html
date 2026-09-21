@@ -78,7 +78,7 @@
     border-radius: 10px;
     padding: 16px 20px;
   }
-  .card.flag, .coach-card.flag {
+  .card.flag, .coach-card.flag, .metric-card.flag, .need-card.flag {
     --text: #0c0c0d;
     --text-dim: rgba(12,12,13,0.62);
     --text-faint: rgba(12,12,13,0.45);
@@ -184,12 +184,12 @@
 
   <div class="section">
     <div class="section-label">Attendance</div>
-    <div class="attendance-period">January 2026 – August 2026</div>
+    <div class="attendance-period">January 2026 – September 2026</div>
     <div class="cards">
     <div class="card">
         <div class="card-label">Sessions Attended</div>
         <div class="card-number">44</div>
-        <div class="card-sub">14th out of 53 athletes</div>
+        <div class="card-sub">19th out of 64 athletes</div>
       </div>
       <div class="card">
         <div class="card-label">Workouts Logged</div>
@@ -205,29 +205,23 @@
 
   <div class="section">
     <div class="section-label">Performance</div>
-    <div class="metric-card">
+    <div class="metric-card flag">
       <div class="metric-cat">Vertical Power</div>
       <div class="metric-name">Standing Vert</div>
-      
+
       <div class="metric-value"><span class="val">12.3 in</span><span class="pct">49th percentile</span></div>
     </div>
     <div class="metric-card">
       <div class="metric-cat">Horizontal Power</div>
       <div class="metric-name">Broad Jump</div>
-      
+
       <div class="metric-value"><span class="val">6'4"</span><span class="pct">50th percentile</span></div>
     </div>
-    <div class="metric-card">
+    <div class="metric-card flag">
       <div class="metric-cat">Acceleration</div>
       <div class="metric-name">10-Yard Sprint</div>
-      
+
       <div class="metric-value"><span class="val">1.68 sec</span><span class="pct">67th percentile</span></div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-cat">Strength</div>
-      <div class="metric-name">Belt Squat</div>
-      <div class="metric-note">Force relative to bodyweight — higher means stronger for your size</div>
-      <div class="metric-value"><span class="val">54.1 N/kg</span></div>
     </div>
   </div>
 
@@ -235,13 +229,13 @@
     <div class="section-label">Needs</div>
     <div class="need-card">
       <div class="need-label">Mobility Need</div>
-      <div class="need-text">Hip mobility Pass (4/4) — clear across the board.</div>
+      <div class="need-text">—</div>
     </div>
     <div class="need-card">
       <div class="need-label">Performance Need</div>
       <div class="need-text">Continued strength and power</div>
     </div>
-    <div class="need-card">
+    <div class="need-card flag">
       <div class="need-label">Lifestyle Need</div>
       <div class="need-text">One day off per week plus packing more snacks for school to fuel properly</div>
     </div>
