@@ -112,10 +112,6 @@ def build_body(data):
         <div class="card-number">—</div>
       </div>
       <div class="card">
-        <div class="card-label">Workouts Logged</div>
-        <div class="card-number">—</div>
-      </div>
-      <div class="card">
         <div class="card-label">Gaps (10+ Days)</div>
         <div class="card-number">—</div>
       </div>'''
@@ -124,10 +120,6 @@ def build_body(data):
         <div class="card-label">Sessions Attended</div>
         <div class="card-number">{esc(data["sessions_attended"])}</div>
         <div class="card-sub">{esc(data["sessions_rank"])}</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Workouts Logged</div>
-        <div class="card-number">{esc(data["workouts_logged"])}<sup>%</sup></div>
       </div>
       <div class="card{gflag}">
         <div class="card-label">Gaps (10+ Days)</div>
