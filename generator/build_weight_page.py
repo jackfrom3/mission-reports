@@ -150,22 +150,74 @@ EXTRA_CSS = '''
                font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; }
   .chart .pt.on { r: 6; }
 
+  .chartwrap { position: relative; }
+  .tip {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: #ffffff;
+    color: #0c0c0d;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.25;
+    padding: 6px 9px;
+    border-radius: 7px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .tip[hidden] { display: none; }
+  .tip .tip-d { display: block; font-weight: 400; color: rgba(12,12,13,0.62); font-size: 11px; }
+
   .readout { font-size: 13px; color: var(--text-dim); margin-top: 10px; min-height: 18px; }
   .hint { font-size: 13px; color: var(--text-faint); margin-bottom: 14px; }
 '''
 
 TAP_JS = '''
 <script>
-document.querySelectorAll('.chart').forEach(function (svg) {
-  var card = svg.closest('.wcard');
-  var out = card.querySelector('.readout');
+document.querySelectorAll('.chartwrap').forEach(function (wrap) {
+  var svg = wrap.querySelector('.chart');
+  var tip = wrap.querySelector('.tip');
+  var out = wrap.parentElement.querySelector('.readout');
+
+  function show(hit) {
+    var dot = hit.previousElementSibling;
+    svg.querySelectorAll('.pt').forEach(function (p) { p.classList.remove('on'); });
+    dot.classList.add('on');
+
+    tip.innerHTML = '';
+    var w = document.createElement('span');
+    w.textContent = hit.dataset.w + ' lbs';
+    var d = document.createElement('span');
+    d.className = 'tip-d';
+    d.textContent = hit.dataset.date;
+    tip.appendChild(w); tip.appendChild(d);
+    tip.hidden = false;
+
+    var wr = wrap.getBoundingClientRect();
+    var hr = hit.getBoundingClientRect();
+    var x = hr.left + hr.width / 2 - wr.left;
+    var y = hr.top + hr.height / 2 - wr.top - 10;
+    var half = tip.offsetWidth / 2;
+    if (x - half < 0) x = half;
+    if (x + half > wr.width) x = wr.width - half;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+
+    if (out) out.textContent = hit.dataset.date + ' \\u00b7 ' + hit.dataset.w + ' lbs';
+  }
+
+  function hide() {
+    tip.hidden = true;
+    svg.querySelectorAll('.pt').forEach(function (p) { p.classList.remove('on'); });
+  }
+
   svg.querySelectorAll('.hit').forEach(function (hit) {
-    hit.addEventListener('click', function () {
-      var dot = hit.previousElementSibling;
-      svg.querySelectorAll('.pt').forEach(function (p) { p.classList.remove('on'); });
-      dot.classList.add('on');
-      out.textContent = hit.dataset.date + ' \\u00b7 ' + hit.dataset.w + ' lbs';
-    });
+    hit.addEventListener('mouseenter', function () { show(hit); });
+    hit.addEventListener('click', function (e) { e.stopPropagation(); show(hit); });
+  });
+  svg.addEventListener('mouseleave', hide);
+  document.addEventListener('click', function (e) {
+    if (!wrap.contains(e.target)) hide();
   });
 });
 </script>
@@ -230,9 +282,12 @@ def build_weight_page(name, entries, updated=None, slug=None):
 
   <div class="section">
     <div class="section-label">Weight Over Time</div>
-    <div class="hint">Tap any point to see that date and weight.</div>
+    <div class="hint">Tap or hover any point to see that date and weight.</div>
     <div class="wcard">
-      {_chart_svg(entries)}
+      <div class="chartwrap">
+        {_chart_svg(entries)}
+        <div class="tip" hidden></div>
+      </div>
       <div class="readout" aria-live="polite"></div>
     </div>
   </div>

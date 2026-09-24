@@ -189,6 +189,24 @@
                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
   .chart .pt.on { r: 6; }
 
+  .chartwrap { position: relative; }
+  .tip {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: #ffffff;
+    color: #0c0c0d;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.25;
+    padding: 6px 9px;
+    border-radius: 7px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .tip[hidden] { display: none; }
+  .tip .tip-d { display: block; font-weight: 400; color: rgba(12,12,13,0.62); font-size: 11px; }
+
   .readout { font-size: 13px; color: var(--text-dim); margin-top: 10px; min-height: 18px; }
   .hint { font-size: 13px; color: var(--text-faint); margin-bottom: 14px; }
 </style>
@@ -205,9 +223,12 @@
 
   <div class="section">
     <div class="section-label">Weight Over Time</div>
-    <div class="hint">Tap any point to see that date and weight.</div>
+    <div class="hint">Tap or hover any point to see that date and weight.</div>
     <div class="wcard">
-      <svg class="chart" viewBox="0 0 320 132" preserveAspectRatio="none" role="img" aria-label="Weight over time"><line x1="0" y1="22.0" x2="320" y2="22.0" class="g"/><line x1="0" y1="106.0" x2="320" y2="106.0" class="g"/><path d="M12.0 84.2 L99.1 59.8 L133.9 66.5 L186.1 43.0 L220.9 59.8 L255.8 85.0 L308.0 68.2" class="ln"/><circle cx="12.0" cy="84.2" r="4.5" class="pt" data-date="Sep 4, 2026" data-w="158.1"/><circle cx="12.0" cy="84.2" r="13" class="hit" data-date="Sep 4, 2026" data-w="158.1"/><circle cx="99.1" cy="59.8" r="4.5" class="pt" data-date="Sep 9, 2026" data-w="161"/><circle cx="99.1" cy="59.8" r="13" class="hit" data-date="Sep 9, 2026" data-w="161"/><circle cx="133.9" cy="66.5" r="4.5" class="pt" data-date="Sep 11, 2026" data-w="160.2"/><circle cx="133.9" cy="66.5" r="13" class="hit" data-date="Sep 11, 2026" data-w="160.2"/><circle cx="186.1" cy="43.0" r="4.5" class="pt" data-date="Sep 14, 2026" data-w="163"/><circle cx="186.1" cy="43.0" r="13" class="hit" data-date="Sep 14, 2026" data-w="163"/><circle cx="220.9" cy="59.8" r="4.5" class="pt" data-date="Sep 16, 2026" data-w="161"/><circle cx="220.9" cy="59.8" r="13" class="hit" data-date="Sep 16, 2026" data-w="161"/><circle cx="255.8" cy="85.0" r="4.5" class="pt" data-date="Sep 18, 2026" data-w="158"/><circle cx="255.8" cy="85.0" r="13" class="hit" data-date="Sep 18, 2026" data-w="158"/><circle cx="308.0" cy="68.2" r="4.5" class="pt" data-date="Sep 21, 2026" data-w="160"/><circle cx="308.0" cy="68.2" r="13" class="hit" data-date="Sep 21, 2026" data-w="160"/><text x="12.0" y="73.2" class="vl" text-anchor="start">158.1</text><text x="308.0" y="57.2" class="vl" text-anchor="end">160</text><text x="12.0" y="125" class="dl" text-anchor="start">Sep 4</text><text x="308.0" y="125" class="dl" text-anchor="end">Sep 21</text></svg>
+      <div class="chartwrap">
+        <svg class="chart" viewBox="0 0 320 132" preserveAspectRatio="none" role="img" aria-label="Weight over time"><line x1="0" y1="22.0" x2="320" y2="22.0" class="g"/><line x1="0" y1="106.0" x2="320" y2="106.0" class="g"/><path d="M12.0 84.2 L99.1 59.8 L133.9 66.5 L186.1 43.0 L220.9 59.8 L255.8 85.0 L308.0 68.2" class="ln"/><circle cx="12.0" cy="84.2" r="4.5" class="pt" data-date="Sep 4, 2026" data-w="158.1"/><circle cx="12.0" cy="84.2" r="13" class="hit" data-date="Sep 4, 2026" data-w="158.1"/><circle cx="99.1" cy="59.8" r="4.5" class="pt" data-date="Sep 9, 2026" data-w="161"/><circle cx="99.1" cy="59.8" r="13" class="hit" data-date="Sep 9, 2026" data-w="161"/><circle cx="133.9" cy="66.5" r="4.5" class="pt" data-date="Sep 11, 2026" data-w="160.2"/><circle cx="133.9" cy="66.5" r="13" class="hit" data-date="Sep 11, 2026" data-w="160.2"/><circle cx="186.1" cy="43.0" r="4.5" class="pt" data-date="Sep 14, 2026" data-w="163"/><circle cx="186.1" cy="43.0" r="13" class="hit" data-date="Sep 14, 2026" data-w="163"/><circle cx="220.9" cy="59.8" r="4.5" class="pt" data-date="Sep 16, 2026" data-w="161"/><circle cx="220.9" cy="59.8" r="13" class="hit" data-date="Sep 16, 2026" data-w="161"/><circle cx="255.8" cy="85.0" r="4.5" class="pt" data-date="Sep 18, 2026" data-w="158"/><circle cx="255.8" cy="85.0" r="13" class="hit" data-date="Sep 18, 2026" data-w="158"/><circle cx="308.0" cy="68.2" r="4.5" class="pt" data-date="Sep 21, 2026" data-w="160"/><circle cx="308.0" cy="68.2" r="13" class="hit" data-date="Sep 21, 2026" data-w="160"/><text x="12.0" y="73.2" class="vl" text-anchor="start">158.1</text><text x="308.0" y="57.2" class="vl" text-anchor="end">160</text><text x="12.0" y="125" class="dl" text-anchor="start">Sep 4</text><text x="308.0" y="125" class="dl" text-anchor="end">Sep 21</text></svg>
+        <div class="tip" hidden></div>
+      </div>
       <div class="readout" aria-live="polite"></div>
     </div>
   </div>
@@ -219,16 +240,50 @@
 </div>
 
 <script>
-document.querySelectorAll('.chart').forEach(function (svg) {
-  var card = svg.closest('.wcard');
-  var out = card.querySelector('.readout');
+document.querySelectorAll('.chartwrap').forEach(function (wrap) {
+  var svg = wrap.querySelector('.chart');
+  var tip = wrap.querySelector('.tip');
+  var out = wrap.parentElement.querySelector('.readout');
+
+  function show(hit) {
+    var dot = hit.previousElementSibling;
+    svg.querySelectorAll('.pt').forEach(function (p) { p.classList.remove('on'); });
+    dot.classList.add('on');
+
+    tip.innerHTML = '';
+    var w = document.createElement('span');
+    w.textContent = hit.dataset.w + ' lbs';
+    var d = document.createElement('span');
+    d.className = 'tip-d';
+    d.textContent = hit.dataset.date;
+    tip.appendChild(w); tip.appendChild(d);
+    tip.hidden = false;
+
+    var wr = wrap.getBoundingClientRect();
+    var hr = hit.getBoundingClientRect();
+    var x = hr.left + hr.width / 2 - wr.left;
+    var y = hr.top + hr.height / 2 - wr.top - 10;
+    var half = tip.offsetWidth / 2;
+    if (x - half < 0) x = half;
+    if (x + half > wr.width) x = wr.width - half;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+
+    if (out) out.textContent = hit.dataset.date + ' \u00b7 ' + hit.dataset.w + ' lbs';
+  }
+
+  function hide() {
+    tip.hidden = true;
+    svg.querySelectorAll('.pt').forEach(function (p) { p.classList.remove('on'); });
+  }
+
   svg.querySelectorAll('.hit').forEach(function (hit) {
-    hit.addEventListener('click', function () {
-      var dot = hit.previousElementSibling;
-      svg.querySelectorAll('.pt').forEach(function (p) { p.classList.remove('on'); });
-      dot.classList.add('on');
-      out.textContent = hit.dataset.date + ' \u00b7 ' + hit.dataset.w + ' lbs';
-    });
+    hit.addEventListener('mouseenter', function () { show(hit); });
+    hit.addEventListener('click', function (e) { e.stopPropagation(); show(hit); });
+  });
+  svg.addEventListener('mouseleave', hide);
+  document.addEventListener('click', function (e) {
+    if (!wrap.contains(e.target)) hide();
   });
 });
 </script>
