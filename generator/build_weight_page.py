@@ -35,6 +35,8 @@ MIN_SPAN = 10.0  # lbs — floor on the y-window so small changes don't look dra
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+FULL_MONTHS = ["January", "February", "March", "April", "May", "June",
+               "July", "August", "September", "October", "November", "December"]
 
 
 def esc(s):
@@ -54,6 +56,11 @@ def fmt_short(iso):
 def fmt_long(iso):
     d = _d(iso)
     return f"{MONTHS[d.month - 1]} {d.day}, {d.year}"
+
+
+def fmt_full(d):
+    """date -> 'September 24, 2026' — used for the page's 'updated' stamp."""
+    return f"{FULL_MONTHS[d.month - 1]} {d.day}, {d.year}"
 
 
 def fmt_w(w):
@@ -236,7 +243,7 @@ def build_weight_page(name, entries, updated=None, slug=None):
     """One athlete, one page. entries: [(iso_date, lbs), ...]"""
     entries = sorted(entries, key=lambda e: e[0])
     slug = slug or weight_slug(name)
-    updated = updated or fmt_long(entries[-1][0])
+    updated = updated or fmt_full(date.today())   # when the page was refreshed, not the last weigh-in
 
     base_url = "https://jackfrom3.github.io/mission-reports"
     page_url = f"{base_url}/{slug}.html"
