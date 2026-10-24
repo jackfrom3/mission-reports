@@ -128,6 +128,16 @@ def build_body(data):
         <div class="card-sub down">{esc(data["gaps_note"])}</div>
       </div>'''
 
+    attendance_section = f'''  <div class="section">
+    <div class="section-label">Attendance</div>
+    <div class="attendance-period">{esc(data["attendance_period"])}</div>
+    <div class="cards">
+{attendance_cards}
+    </div>
+  </div>
+
+''' if not data.get("hide_attendance") else ""
+
     coach_section = f'''  <div class="section">
     <div class="section-label">Coach Evaluation</div>
 
@@ -143,15 +153,7 @@ def build_body(data):
     <div class="meta">{esc(data["header_date"])}</div>
   </div>
 
-  <div class="section">
-    <div class="section-label">Attendance</div>
-    <div class="attendance-period">{esc(data["attendance_period"])}</div>
-    <div class="cards">
-{attendance_cards}
-    </div>
-  </div>
-
-  <div class="section">
+{attendance_section}  <div class="section">
     <div class="section-label">Performance</div>
 {perf_html}  </div>
 
