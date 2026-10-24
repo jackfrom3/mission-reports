@@ -91,6 +91,7 @@ def build_body(data):
             ("Performance Need", "performance"),
             ("Lifestyle Need", "lifestyle"),
         ]
+        if data["needs"].get(key)
     )
     coach_html = "".join(
         coach_card(
