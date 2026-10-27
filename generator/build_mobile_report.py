@@ -106,7 +106,7 @@ def build_body(data):
 
     gflag = " flag" if gaps_flagged(data.get("gaps_note", "")) else ""
 
-    blanked = data["sessions_attended"] == "—"
+    blanked = data.get("sessions_attended", "—") == "—"
     if blanked:
         attendance_cards = f'''    <div class="card">
         <div class="card-label">Sessions Attended</div>
